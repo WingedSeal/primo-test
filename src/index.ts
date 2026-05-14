@@ -1,3 +1,5 @@
+import * as readline from "readline/promises";
+
 interface DataPointer {
     array: number[];
     index: number;
@@ -63,3 +65,43 @@ const merge = (
         if (dataPointers.length === 0) return mergedArray;
     }
 };
+
+const input = async (query: string): Promise<string> => {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+    });
+    try {
+        return await rl.question(query);
+    } finally {
+        rl.close();
+    }
+};
+
+const isAscending = (arr: number[]) =>
+    arr.every((v, i) => i === 0 || v >= arr[i - 1]);
+const isDescending = (arr: number[]) =>
+    arr.every((v, i) => i === 0 || v <= arr[i - 1]);
+
+const main = async () => {
+    const collection_1 = (await input("collection_1: "))
+        .split(",")
+        .map((s) => Number(s.trim()));
+    if (!isAscending(collection_1))
+        throw new Error("collection_1 is not ascending");
+    const collection_2 = (await input("collection_2: "))
+        .split(",")
+        .map((s) => Number(s.trim()));
+    if (!isDescending(collection_2))
+        throw new Error("collection_2 is not descending");
+    const collection_3 = (await input("collection_3: "))
+        .split(",")
+        .map((s) => Number(s.trim()));
+    if (!isAscending(collection_3))
+        throw new Error("collection_3 is not ascending");
+
+    const result = merge(collection_1, collection_2, collection_3);
+    console.log(result);
+};
+
+main();
