@@ -20,7 +20,7 @@ const advance = (dataPointer: DataPointer): boolean => {
     return dataPointer.index >= dataPointer.array.length;
 };
 
-const merge = (
+export const merge = (
     collection_1: number[],
     collection_2: number[],
     collection_3: number[],
@@ -44,7 +44,8 @@ const merge = (
         collection1DataPointer,
         collection2DataPointer,
         collection3DataPointer,
-    ];
+    ].filter((v) => v.array.length !== 0);
+    if (dataPointers.length === 0) return [];
     let mergedArray: number[] = [];
     while (true) {
         let minNumber = Infinity;
@@ -104,4 +105,4 @@ const main = async () => {
     console.log(result);
 };
 
-main();
+if (require.main === module) main();
