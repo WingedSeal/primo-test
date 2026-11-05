@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "types": ["node", "jest"],
+        "target": "ES6",
+        "module": "CommonJS",
+        "strict": true,
+        "esModuleInterop": true
+    },
+    "exclude": ["jest.config.js"]
+}
